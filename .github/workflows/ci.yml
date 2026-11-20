@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: black --check src tests scripts
+      - run: flake8 src tests scripts --max-line-length=100 --extend-ignore=E203,W503
+      - run: pytest -q
+      - name: Validate raw data with Pandera
+        run: python -m scripts.validate_data
+      - name: Check data pipeline
+        run: python -m src.data.make_dataset data/raw/UCI_Credit_Card.csv data/processed
