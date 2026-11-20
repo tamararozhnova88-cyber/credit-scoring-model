@@ -1,4 +1,5 @@
 """FastAPI service. Run: uvicorn src.api.app:app --host 0.0.0.0 --port 8000"""
+
 from functools import lru_cache
 from pathlib import Path
 import joblib

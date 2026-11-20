@@ -1,4 +1,5 @@
 """Data contract using Pandera. Validates raw and prepared datasets."""
+
 import pandas as pd
 import pandera.pandas as pa
 from pandera import Check
@@ -18,7 +19,9 @@ def schema():
         "MARRIAGE": pa.Column(int, Check.in_range(0, 3), nullable=False, coerce=True),
         TARGET: pa.Column(int, Check.isin([0, 1]), nullable=False, coerce=True),
     }
-    cols.update({p: pa.Column(int, Check.in_range(-2, 9), nullable=False, coerce=True) for p in PAY})
+    cols.update(
+        {p: pa.Column(int, Check.in_range(-2, 9), nullable=False, coerce=True) for p in PAY}
+    )
     cols.update({p: pa.Column(float, nullable=False, coerce=True) for p in BILL})
     cols.update({p: pa.Column(float, Check.ge(0), nullable=False, coerce=True) for p in PAID})
     return pa.DataFrameSchema(cols, strict=False)

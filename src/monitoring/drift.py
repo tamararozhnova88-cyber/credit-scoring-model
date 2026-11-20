@@ -1,4 +1,5 @@
 """Population Stability Index on fixed reference-score bins."""
+
 import argparse
 import json
 from pathlib import Path
