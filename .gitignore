@@ -13,7 +13,9 @@ mlruns/
 .env
 .env.*
 
-data/raw/
+data/raw/*
+!data/raw/*.dvc
+!data/raw/.gitignore
 data/processed/
 
 models/*.pkl
